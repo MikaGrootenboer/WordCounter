@@ -1,4 +1,4 @@
-a = "This is is a test test senctence"
+a = "This is is is a test test senctence"
 head_list = []
 
 class Splitter:
@@ -51,5 +51,15 @@ test.split(a)
 
 print(head_list)
 
-
-
+def list_sorter(main_list): 
+    length = len(main_list) 
+    for i in range(length): 
+        for j in range(0, length-i-1): 
+            if (main_list[j][1] < main_list[j + 1][1]): 
+                tempo = main_list[j] 
+                main_list[j]= main_list[j + 1] 
+                main_list[j + 1]= tempo 
+    return main_list 
+  
+list_sorter(head_list)
+print(head_list)
