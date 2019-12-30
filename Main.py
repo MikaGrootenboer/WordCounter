@@ -1,5 +1,25 @@
 a = "This is is a test test senctence"
+head_list = []
 
+def list_maker(main_list, word):
+    if (len(main_list)==0):
+        print(main_list)
+        main_list.append([word,1])
+        print(main_list)
+    else:   
+        for i in range(len(main_list)):
+            if(main_list[i][0]==word):
+                 print("'",word,"'","already in list adding a +1 to the counter")
+                 print("oldlist ==",main_list)
+                 main_list[i][1] = main_list[i][1]+1
+                 print("newlist ==",main_list)
+                 return main_list
+            elif((main_list[i]!=word and i+1 == len(main_list))):
+                print("new word found, adding:..",word)
+                print("oldlist ==",main_list)
+                main_list.append([word,1])
+                print("newlist ==",main_list)
+                return main_list
 
 class Splitter:
     def __init__(self):
@@ -11,46 +31,23 @@ class Splitter:
         for i in range(len(sentence)):
             if(sentence[i] == " " and self.word_counter > 0):
                 current_word = a[prev+1:i]
-                #print(current_word)
-                self.wordlist.append([current_word,1])
+                list_maker(head_list,current_word)
                 prev = i
                 self.word_counter = self.word_counter + 1
             if(sentence[i] == " " and self.word_counter == 0):
                 prev = i
                 first_word = sentence[:prev]
-                #print(first_word)
-                self.wordlist.append([first_word,2])
+                list_maker(head_list,first_word)
                 self.word_counter = self.word_counter + 1
             if(i+1 == len(sentence)):
-                #print(sentence[prev+1:])
-                self.wordlist.append([sentence[prev+1:],1])
+                last_word =sentence[prev+1:]
+                list_maker(head_list,last_word)
                 self.word_counter = self.word_counter + 1
-    
-    def word_count_printer(self):
-        return self.word_counter
-
-    def word_list_return(self):
-        return self.wordlist
 
 test = Splitter()
 test.split(a)
 
-newlist = test.word_list_return()
+print(head_list)
 
-final_list = []
-
-for i in range(test.word_count_printer()):
-    word_count_adder  = 1
-    j = 1
-    if (newlist[i][0] == newlist[j][0]):
-        print(newlist[i][0])
-        j = j + 1
-        final_list.append([newlist[i][0], (1 + word_count_adder)])
-    else:
-        j = j + 1
-        final_list.append([newlist[i][0],1])
-
-
-print(final_list)
 
 
