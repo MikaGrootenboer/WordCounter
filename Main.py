@@ -1,3 +1,5 @@
+import textract
+
 words_input = "This is is is a test test senctence"
 main_list = []
 
