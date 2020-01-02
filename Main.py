@@ -1,6 +1,7 @@
+import sys
 import textract
-
-words_input = "This is is is a test test senctence"
+given_input = textract.process("word_document.docx").decode()
+test_input = "test test dit is een test om de test file te testen"
 main_list = []
 
 class List_creater:
@@ -41,30 +42,16 @@ class Splitter:
         self.word_counter = 0
     #function that splits a sentence.
     def split(self,sentence):
-        for i in range(len(sentence)):
-            if(sentence[i] == " " and self.word_counter > 0):
-                current_word = words_input[prev+1:i]
-                List_creater().list_maker(main_list,current_word)
-                prev = i
-                self.word_counter = self.word_counter + 1
-            if(sentence[i] == " " and self.word_counter == 0):
-                prev = i
-                first_word = sentence[:prev]
-                List_creater().list_maker(main_list,first_word)
-                self.word_counter = self.word_counter + 1
-            if(i+1 == len(sentence)):
-                last_word =sentence[prev+1:]
-                List_creater().list_maker(main_list,last_word)
-                self.word_counter = self.word_counter + 1
-
+        splitted_sentence = sentence.split()
+        for i in range(len(splitted_sentence)):
+            List_creater().list_maker(main_list,splitted_sentence[i])
+            self.word_counter = self.word_counter + 1
 
 #create all the class instances.
 Mainloop = Splitter()
 MainList = List_creater()
 
-#split and add the words of the variable "words_input" to the head_list
-Mainloop.split(words_input)
-
-
+#split,add and sort the words of the given variable to the head_list
+print(Mainloop.split(given_input))
 MainList.list_sorter(main_list)
 print(main_list)
